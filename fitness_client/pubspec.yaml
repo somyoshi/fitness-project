@@ -1,0 +1,43 @@
+name: fitness_client
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  cloud_firestore: ^0.13.2+1
+  provider: ^4.0.4
+  get_it: ^3.1.0
+  firebase_auth: ^0.15.4
+  google_fonts: ^0.3.8
+  toast: ^0.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+   - assets/images/background.png
+   - assets/images/logo.png
+   - assets/images/pessoa.png
+
+   - assets/menu/home.png
+   - assets/menu/exercicio.png
+   - assets/menu/score.png
+
+   - assets/menu/charts.png
+   - assets/menu/calendar.png
+   - assets/menu/notes.png
+   - assets/menu/health.png
+   - assets/menu/chat.png
