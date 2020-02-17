@@ -6,11 +6,11 @@ import 'package:fitness_client/core/providers/apiProvider.dart';
 
 class ProfileProvider {
   ApiProvider _apiProvider = ApiProvider('profiles');
-  Stream<Profile> getStreamProfile(String uid){
-    StreamTransformer<DocumentSnapshot, Profile> _streamTransformer =
+  Stream<ProfileModel> getProfile(String uid){
+    StreamTransformer<DocumentSnapshot, ProfileModel> _streamTransformer =
         StreamTransformer.fromHandlers(handleData: (data, sink) {
       return sink.add(
-        Profile.map(data.data, documentID: data.documentID),
+        ProfileModel.map(data.data, documentID: data.documentID),
       );
     });
     return _apiProvider.streamDataCollectionById(uid).transform(_streamTransformer);

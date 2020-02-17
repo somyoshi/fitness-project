@@ -1,23 +1,32 @@
-class Profile {
+class ProfileModel{
   String id;
   String nome;
   String email;
-  String img;
+  String imagem;
+  String cpf;
 
-  Profile({this.id='', this.nome='', this.email='', this.img=''});
+  ProfileModel({this.id, this.nome, this.email, this.imagem, this.cpf}){
+    this.id ??= '';
+    this.nome ??= '';
+    this.email ??= '';
+    this.imagem ??= '';
+    this.cpf ??= '';
+  }
 
-  Profile.map(dynamic obj, {String documentID}) {
-    id = documentID;
-    nome = obj['nome'];
-    email = obj['email'];
-    img = obj['img'];
+  ProfileModel.map(dynamic obj, {String documentID}) {
+    this.id = documentID;
+    this.nome = obj['nome'];
+    this.email = obj['email'];
+    this.imagem = obj['imagem'];
+    this.cpf = obj['cpf'];
   }
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
     map["nome"] = (this.nome ?? '').toUpperCase();
     map["email"] = (this.email ?? '').toUpperCase();
-    map["img"] = (this.img ?? '').toUpperCase();
+    map["imagem"] = (this.imagem ?? '').toUpperCase();
+    map["cpf"] = (this.cpf ?? '').toUpperCase();
     return map;
   }
 }

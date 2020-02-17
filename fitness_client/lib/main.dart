@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_client/core/viewmodels/alunoViewModel.dart';
 import 'package:fitness_client/core/viewmodels/usuarioViewModel.dart';
 import 'package:fitness_client/locator.dart';
 import 'package:fitness_client/ui/routers.dart';
@@ -19,6 +20,7 @@ class FitnessApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => locator<UsuarioViewModel>()),
+        ChangeNotifierProvider(create: (_) => locator<AlunoViewModel>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

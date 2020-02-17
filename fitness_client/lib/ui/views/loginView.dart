@@ -1,7 +1,7 @@
-import 'package:fitness_client/core/viewmodels/usuarioViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toast/toast.dart';
+import 'package:fitness_client/core/viewmodels/loginViewModel.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -9,16 +9,12 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final _formKey = GlobalKey<FormState>();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false;
-  bool _isObscureText = true;
+  LoginViewModel _model = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading
+      body: _model.isLoading
           ? _buildIsloading()
           : SingleChildScrollView(
               child: Container(
@@ -134,13 +130,13 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildLoginForm() {
     return Form(
-      key: _formKey,
+      key: _model.formKey,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 45),
         child: Column(
           children: <Widget>[
             TextFormField(
-              controller: _emailController,
+              controller: _model.emailController,
               cursorColor: Colors.white,
               style: TextStyle(color: Colors.white),
               validator: (String value) {
@@ -165,8 +161,8 @@ class _LoginViewState extends State<LoginView> {
               height: 16,
             ),
             TextFormField(
-              controller: _passwordController,
-              obscureText: _isObscureText,
+              controller: _model.passwordController,
+              obscureText: _model.isObscureText,
               cursorColor: Colors.white,
               style: TextStyle(color: Colors.white),
               validator: (String text) {
@@ -187,12 +183,14 @@ class _LoginViewState extends State<LoginView> {
                 hintStyle: TextStyle(color: Colors.white70, fontSize: 15),
                 suffixIcon: IconButton(
                     icon: Icon(
-                      _isObscureText ? Icons.visibility : Icons.visibility_off,
+                      _model.isObscureText
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                       color: Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
-                        _isObscureText = !_isObscureText;
+                        _model.isObscureText = !_model.isObscureText;
                       });
                     }),
               ),
@@ -202,16 +200,16 @@ class _LoginViewState extends State<LoginView> {
             ),
             GestureDetector(
               onTap: () {
-                if (_formKey.currentState.validate()) {
+                if (_model.formKey.currentState.validate()) {
                   setState(() {
-                    _isLoading = true;
+                    _model.isLoading = true;
                   });
-                  UsuarioViewModel().signIn(
-                      email: _emailController.text,
-                      password: _passwordController.text,
+                  _model.signIn(
+                      email: _model.emailController.text,
+                      password: _model.passwordController.text,
                       onSuccess: () {
                         setState(() {
-                          _isLoading = false;
+                          _model.isLoading = false;
                         });
                       },
                       onFail: () => _onLoginFailed(context));
@@ -264,7 +262,7 @@ class _LoginViewState extends State<LoginView> {
     Toast.show('Usuário ou senha inválidos!', context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     setState(() {
-      _isLoading = false;
+      _model.isLoading = false;
     });
   }
 }

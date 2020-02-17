@@ -5,7 +5,7 @@ import 'package:fitness_client/core/providers/usuarioProvider.dart';
 import 'package:flutter/material.dart';
 
 class UsuarioViewModel extends ChangeNotifier {
-  Profile profile = Profile();
+  ProfileModel profile = ProfileModel();
   UsuarioProvider _usuarioProvider = UsuarioProvider();
   FirebaseUser user;
 
@@ -25,7 +25,7 @@ class UsuarioViewModel extends ChangeNotifier {
     return await _usuarioProvider.getUid();
   }
 
-  Stream<Profile> getStreamProfile(){
-    return ProfileProvider().getStreamProfile(user.uid);
+  Stream<ProfileModel> getStreamProfile(){
+    return ProfileProvider().getProfile(user.uid);
   } 
 }

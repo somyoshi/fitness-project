@@ -13,10 +13,20 @@ class ApiProvider {
     return _ref.getDocuments();
   }
 
-  Stream<QuerySnapshot> streamDataCollection() {
+  Stream<QuerySnapshot> streamDataCollectionWithWhere(
+      dynamic field1, dynamic value1) {
+    return _ref
+        .where(
+          field1,
+          isEqualTo: value1,
+        )
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> streamDataCollection(){
     return _ref.snapshots();
   }
-  
+
   Stream<DocumentSnapshot> streamDataCollectionById(String id) {
     return _ref.document(id).snapshots();
   }
